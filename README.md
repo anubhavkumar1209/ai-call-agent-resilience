@@ -1,28 +1,47 @@
 # AI Call Agent - Error Recovery & Resilience System
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A production-grade error recovery and resilience system for AI Call Agents that interact with multiple third-party services (ElevenLabs TTS, LLM providers). Implements industry-standard patterns to handle failures intelligently and maintain high availability.
 
 ---
+## 📁 Project Structure
 
-## 📋 Table of Contents
-
-- [Problem Statement](#problem-statement)
-- [Architecture Overview](#architecture-overview)
-- [System Components](#system-components)
-- [Architecture Decisions](#architecture-decisions)
-- [Error Flow](#error-flow)
-- [Retry & Circuit Breaker Behavior](#retry--circuit-breaker-behavior)
-- [Alerting Logic](#alerting-logic)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Example Logs](#example-logs)
-- [Configuration](#configuration)
-- [Project Structure](#project-structure)
-
----
+```
+ai-call-agent-resilience/
+├── src/
+│   ├── __init__.py
+│   ├── config.py                      # Configuration
+│   ├── main.py                        # Application entry point
+│   ├── exceptions/
+│   │   ├── __init__.py
+│   │   └── custom_exceptions.py      # Exception hierarchy
+│   ├── retry/
+│   │   ├── __init__.py
+│   │   └── retry_handler.py          # Retry with exponential backoff
+│   ├── circuit_breaker/
+│   │   ├── __init__.py
+│   │   └── circuit_breaker.py        # Circuit breaker pattern
+│   ├── logging/
+│   │   ├── __init__.py
+│   │   └── logger.py                 # Dual logging (console + JSON file)
+│   ├── alerts/
+│   │   ├── __init__.py
+│   │   └── alert_manager.py          # Multi-channel alerting
+│   ├── health_check/
+│   │   ├── __init__.py
+│   │   └── health_checker.py         # Background health monitoring
+│   └── services/
+│       ├── __init__.py
+│       ├── elevenlabs_service.py     # ElevenLabs mock service
+│       └── llm_service.py            # LLM mock service
+├── logs/
+│   └── error_recovery.log            # JSON structured logs
+├── requirements.txt                   # Python dependencies
+├── .env                               # Environment variables (not in Git)
+├── .gitignore                         # Git ignore rules
+└── README.md                          # This file
+```
 
 ## 🎯 Problem Statement
 
@@ -594,44 +613,6 @@ WEBHOOK_URL=https://webhook.site/your-unique-url
 ```
 
 ---
-
-## 📁 Project Structure
-
-```
-ai-call-agent-resilience/
-├── src/
-│   ├── __init__.py
-│   ├── config.py                      # Configuration
-│   ├── main.py                        # Application entry point
-│   ├── exceptions/
-│   │   ├── __init__.py
-│   │   └── custom_exceptions.py      # Exception hierarchy
-│   ├── retry/
-│   │   ├── __init__.py
-│   │   └── retry_handler.py          # Retry with exponential backoff
-│   ├── circuit_breaker/
-│   │   ├── __init__.py
-│   │   └── circuit_breaker.py        # Circuit breaker pattern
-│   ├── logging/
-│   │   ├── __init__.py
-│   │   └── logger.py                 # Dual logging (console + JSON file)
-│   ├── alerts/
-│   │   ├── __init__.py
-│   │   └── alert_manager.py          # Multi-channel alerting
-│   ├── health_check/
-│   │   ├── __init__.py
-│   │   └── health_checker.py         # Background health monitoring
-│   └── services/
-│       ├── __init__.py
-│       ├── elevenlabs_service.py     # ElevenLabs mock service
-│       └── llm_service.py            # LLM mock service
-├── logs/
-│   └── error_recovery.log            # JSON structured logs
-├── requirements.txt                   # Python dependencies
-├── .env                               # Environment variables (not in Git)
-├── .gitignore                         # Git ignore rules
-└── README.md                          # This file
-```
 
 ## 🧪 Testing
 
